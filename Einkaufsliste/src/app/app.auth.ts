@@ -2,11 +2,11 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 import { environment } from '../environments/environment';
 
 export const authConfig: AuthConfig = {
-  issuer: 'http://localhost:8080/realms/ILV',
+  issuer: 'http://localhost:8080/realms/Nico-Seiler-Einkaufsliste',
   requireHttps: false,
   redirectUri: environment.frontendBaseUrl,
   postLogoutRedirectUri: environment.frontendBaseUrl,
-  clientId: 'demoapp',
+  clientId: 'einkaufsliste',
   scope: 'openid profile roles offline_access',
   responseType: 'code',
   showDebugInformation: true,

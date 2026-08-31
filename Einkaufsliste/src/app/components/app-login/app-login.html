@@ -1,1 +1,10 @@
-<p>app-login works!</p>
+@if (isAuthenticated()) {
+  <div class="app-login">
+    <span class="app-login__user">{{ username || useralias }}</span>
+    <button type="button" class="app-login__btn" (click)="logout()">Logout</button>
+  </div>
+} @else {
+  <div class="app-login">
+    <button type="button" class="app-login__btn" (click)="login()">Login</button>
+  </div>
+}

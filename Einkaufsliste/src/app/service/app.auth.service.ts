@@ -34,13 +34,15 @@ export class AppAuthService {
     return this._accessToken;
   }
 
-  async initAuth(): Promise<any> {
-    return new Promise<void>(() => {
+  async initAuth(): Promise<void> {
+    return new Promise<void>((resolve) => {
       this.oauthService.configure(this.authConfig);
       this.oauthService.events
         .subscribe(e => this.handleEvents(e));
-      this.oauthService.loadDiscoveryDocumentAndTryLogin();
-      this.oauthService.setupAutomaticSilentRefresh();
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+        this.oauthService.setupAutomaticSilentRefresh();
+        resolve();
+      });
     });
   }
 

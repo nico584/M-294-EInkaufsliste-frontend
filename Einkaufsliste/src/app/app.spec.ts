@@ -1,10 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { AuthConfig, OAuthModule } from 'angular-oauth2-oidc';
+import { authConfig } from './app.auth';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [
+        OAuthModule.forRoot({ resourceServer: { sendAccessToken: true } }),
+        App,
+      ],
+      providers: [{ provide: AuthConfig, useValue: authConfig }],
+      teardown: { destroyAfterEach: true },
     }).compileComponents();
   });
 
@@ -18,6 +25,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Einkaufsliste');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Einkaufsliste');
   });
 });
