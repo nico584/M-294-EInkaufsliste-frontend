@@ -1,0 +1,70 @@
+<div class="page-header">
+  <div>
+    <button mat-icon-button (click)="back()" aria-label="Zurück">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="list-title">{{ shoppingList.name }}</span>
+  </div>
+  <button *appIsInRoles="[appRoles.Admin]" (click)="addItem()" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon>
+    Artikel hinzufügen
+  </button>
+</div>
+
+<p class="list-description">{{ shoppingList.description }}</p>
+
+@if (itemsDataSource.data.length === 0) {
+  <p class="empty-hint">Diese Liste enthält noch keine Artikel.</p>
+}
+
+<table mat-table [dataSource]="itemsDataSource" class="full-width">
+  <ng-container matColumnDef="done">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let item" mat-cell>
+      <mat-checkbox
+        *appIsInRoles="[appRoles.Update]"
+        [checked]="item.done"
+        (change)="toggleDone(item)"
+      ></mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef mat-header-cell>Name</th>
+    <td *matCellDef="let item" mat-cell [class.done]="item.done">{{ item.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <th *matHeaderCellDef mat-header-cell>Menge</th>
+    <td *matCellDef="let item" mat-cell>{{ item.quantity }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="note">
+    <th *matHeaderCellDef mat-header-cell>Notiz</th>
+    <td *matCellDef="let item" mat-cell>{{ item.note }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th *matHeaderCellDef mat-header-cell>Kategorie</th>
+    <td *matCellDef="let item" mat-cell>
+      @if (item.category) {
+        <mat-chip>{{ item.category.name }}</mat-chip>
+      }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let item" mat-cell style="text-align: end">
+      <button *appIsInRoles="[appRoles.Update]" (click)="editItem(item)" mat-icon-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *appIsInRoles="[appRoles.Admin]" (click)="deleteItem(item)" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: columns" mat-row></tr>
+</table>

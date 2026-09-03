@@ -1,0 +1,27 @@
+.page-header > div {
+  display: flex;
+  align-items: center;
+}
+
+.list-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.list-description {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 16px 48px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.done {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.empty-hint {
+  color: rgba(0, 0, 0, 0.6);
+}

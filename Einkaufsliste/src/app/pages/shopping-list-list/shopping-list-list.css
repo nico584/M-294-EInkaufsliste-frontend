@@ -1,0 +1,13 @@
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.list-card {
+  cursor: pointer;
+}
+
+.empty-hint {
+  color: rgba(0, 0, 0, 0.6);
+}
