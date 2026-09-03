@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h2>Kategorien</h2>
+  <button *appIsInRoles="[roles.Admin]" (click)="add()" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon>
+    Kategorie erstellen
+  </button>
+</div>
+
+<table mat-table [dataSource]="categoriesDataSource" class="full-width">
+  <ng-container matColumnDef="color">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let category" mat-cell>
+      <span class="color-dot" [style.background]="category.color"></span>
+    </td>
+  </ng-container>
+
+  <mat-text-column name="name" headerText="Name"></mat-text-column>
+  <mat-text-column name="description" headerText="Beschreibung"></mat-text-column>
+
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let category" mat-cell style="text-align: end">
+      <button *appIsInRoles="[roles.Update]" (click)="edit(category)" mat-icon-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *appIsInRoles="[roles.Admin]" (click)="delete(category)" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: columns" mat-row></tr>
+</table>
