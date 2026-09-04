@@ -6,8 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AppRoles } from '../../app.roles';
-import { IsInRolesDirective } from '../../directives/app-is-in-roles.dir';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { ShoppingListDialog } from '../../components/shopping-list-dialog/shopping-list-dialog';
 import { ShoppingList } from '../../data/shopping-list';
@@ -17,14 +15,10 @@ import { ShoppingListService } from '../../service/shopping-list.service';
   selector: 'app-shopping-list-list',
   templateUrl: './shopping-list-list.html',
   styleUrl: './shopping-list-list.css',
-  imports: [IsInRolesDirective, MatCardModule, MatIcon, MatButton, MatIconButton],
+  imports: [MatCardModule, MatIcon, MatButton, MatIconButton],
 })
 export class ShoppingListList implements OnInit {
   public lists: ShoppingList[] = [];
-
-  public get roles() {
-    return AppRoles;
-  }
 
   private service = inject(ShoppingListService);
   private router = inject(Router);

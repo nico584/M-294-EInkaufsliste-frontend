@@ -9,8 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
 
-import { AppRoles } from '../../app.roles';
-import { IsInRolesDirective } from '../../directives/app-is-in-roles.dir';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { ItemDialog } from '../../components/item-dialog/item-dialog';
 import { Category } from '../../data/category';
@@ -24,25 +22,13 @@ import { ShoppingListService } from '../../service/shopping-list.service';
   selector: 'app-shopping-list-detail',
   templateUrl: './shopping-list-detail.html',
   styleUrl: './shopping-list-detail.css',
-  imports: [
-    IsInRolesDirective,
-    MatTableModule,
-    MatCheckbox,
-    MatChip,
-    MatIcon,
-    MatButton,
-    MatIconButton,
-  ],
+  imports: [MatTableModule, MatCheckbox, MatChip, MatIcon, MatButton, MatIconButton],
 })
 export class ShoppingListDetail implements OnInit {
   public shoppingList: ShoppingList = new ShoppingList();
   public categories: Category[] = [];
   public itemsDataSource = new MatTableDataSource<Item>();
   public columns = ['done', 'name', 'quantity', 'note', 'category', 'actions'];
-
-  public get appRoles() {
-    return AppRoles;
-  }
 
   private listId = 0;
 

@@ -5,7 +5,7 @@
     </button>
     <span class="list-title">{{ shoppingList.name }}</span>
   </div>
-  <button *appIsInRoles="[appRoles.Admin]" (click)="addItem()" mat-raised-button color="primary">
+  <button (click)="addItem()" mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
     Artikel hinzufügen
   </button>
@@ -22,7 +22,6 @@
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let item" mat-cell>
       <mat-checkbox
-        *appIsInRoles="[appRoles.Update]"
         [checked]="item.done"
         (change)="toggleDone(item)"
       ></mat-checkbox>
@@ -56,10 +55,10 @@
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let item" mat-cell style="text-align: end">
-      <button *appIsInRoles="[appRoles.Update]" (click)="editItem(item)" mat-icon-button color="primary">
+      <button (click)="editItem(item)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
-      <button *appIsInRoles="[appRoles.Admin]" (click)="deleteItem(item)" mat-icon-button color="warn">
+      <button (click)="deleteItem(item)" mat-icon-button color="warn">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

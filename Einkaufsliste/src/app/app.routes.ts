@@ -34,7 +34,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/category-list/category-list').then(c => c.CategoryList),
     canActivate: [appCanActivate],
     data: {
-      roles: [AppRoles.Admin],
+      roles: [AppRoles.Read],
       pagetitle: 'Kategorien',
     },
   },

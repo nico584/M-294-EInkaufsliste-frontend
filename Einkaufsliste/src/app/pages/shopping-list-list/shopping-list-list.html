@@ -1,6 +1,6 @@
 <div class="page-header">
   <h2>Meine Einkaufslisten</h2>
-  <button *appIsInRoles="[roles.Admin]" (click)="add()" mat-raised-button color="primary">
+  <button (click)="add()" mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
     Liste erstellen
   </button>
@@ -21,10 +21,10 @@
         <p>{{ list.description }}</p>
       </mat-card-content>
       <mat-card-actions align="end">
-        <button *appIsInRoles="[roles.Update]" (click)="edit(list, $event)" mat-icon-button color="primary">
+        <button (click)="edit(list, $event)" mat-icon-button color="primary">
           <mat-icon>edit</mat-icon>
         </button>
-        <button *appIsInRoles="[roles.Admin]" (click)="delete(list, $event)" mat-icon-button color="warn">
+        <button (click)="delete(list, $event)" mat-icon-button color="warn">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-actions>

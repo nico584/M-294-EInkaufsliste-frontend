@@ -5,8 +5,6 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { AppRoles } from '../../app.roles';
-import { IsInRolesDirective } from '../../directives/app-is-in-roles.dir';
 import { CategoryDialog } from '../../components/category-dialog/category-dialog';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { Category } from '../../data/category';
@@ -16,15 +14,11 @@ import { CategoryService } from '../../service/category.service';
   selector: 'app-category-list',
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
-  imports: [IsInRolesDirective, MatTableModule, MatIcon, MatButton, MatIconButton],
+  imports: [MatTableModule, MatIcon, MatButton, MatIconButton],
 })
 export class CategoryList implements OnInit {
   public categoriesDataSource = new MatTableDataSource<Category>();
   public columns = ['color', 'name', 'description', 'actions'];
-
-  public get roles() {
-    return AppRoles;
-  }
 
   private service = inject(CategoryService);
   private dialog = inject(MatDialog);

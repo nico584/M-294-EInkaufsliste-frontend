@@ -1,6 +1,6 @@
 <div class="page-header">
   <h2>Kategorien</h2>
-  <button *appIsInRoles="[roles.Admin]" (click)="add()" mat-raised-button color="primary">
+  <button (click)="add()" mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
     Kategorie erstellen
   </button>
@@ -20,10 +20,10 @@
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let category" mat-cell style="text-align: end">
-      <button *appIsInRoles="[roles.Update]" (click)="edit(category)" mat-icon-button color="primary">
+      <button (click)="edit(category)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
-      <button *appIsInRoles="[roles.Admin]" (click)="delete(category)" mat-icon-button color="warn">
+      <button (click)="delete(category)" mat-icon-button color="warn">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
