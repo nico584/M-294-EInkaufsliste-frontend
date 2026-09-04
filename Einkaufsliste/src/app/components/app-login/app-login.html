@@ -1,10 +1,16 @@
 @if (isAuthenticated()) {
   <div class="app-login">
     <span class="app-login__user">{{ username || useralias }}</span>
-    <button type="button" class="app-login__btn" (click)="logout()">Logout</button>
+    <button type="button" class="app-login__btn" mat-stroked-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
   </div>
 } @else {
   <div class="app-login">
-    <button type="button" class="app-login__btn" (click)="login()">Login</button>
+    <button type="button" class="app-login__btn" mat-stroked-button (click)="login()">
+      <mat-icon>login</mat-icon>
+      Login
+    </button>
   </div>
 }

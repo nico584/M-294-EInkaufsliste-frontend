@@ -1,6 +1,5 @@
-.page {
-  max-width: 480px;
-  margin: 4rem auto;
-  text-align: center;
-  font-family: system-ui, sans-serif;
+.app-title {
+  margin-left: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
 }

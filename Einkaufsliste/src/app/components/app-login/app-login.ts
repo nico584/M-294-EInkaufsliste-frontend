@@ -1,9 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { AppAuthService } from '../../service/app.auth.service';
 
 @Component({
   selector: 'app-app-login',
-  imports: [],
+  imports: [MatButton, MatIcon],
   templateUrl: './app-login.html',
   styleUrl: './app-login.css',
 })

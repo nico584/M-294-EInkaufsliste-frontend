@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h2>Benutzerverwaltung</h2>
+</div>
+
+<table mat-table [dataSource]="usersDataSource" class="full-width">
+  <mat-text-column name="username" headerText="Benutzername"></mat-text-column>
+  <mat-text-column name="firstName" headerText="Vorname"></mat-text-column>
+  <mat-text-column name="lastName" headerText="Nachname"></mat-text-column>
+
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let user" mat-cell style="text-align: end">
+      <button (click)="delete(user)" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: columns" mat-row></tr>
+</table>

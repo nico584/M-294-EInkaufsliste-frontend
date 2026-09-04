@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthConfig, OAuthErrorEvent, OAuthEvent, OAuthService} from 'angular-oauth2-oidc';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 interface DecodedAccessToken {
   resource_access?: Record<string, { roles?: string[] | string }>;
@@ -22,6 +22,8 @@ export class AppAuthService {
   public readonly useraliasObservable: Observable<string> = this.useraliasSubject.asObservable();
   private accessTokenSubject = new BehaviorSubject<string>('');
   public readonly accessTokenObservable: Observable<string> = this.accessTokenSubject.asObservable();
+  private rolesSubject = new BehaviorSubject<string[]>([]);
+  public readonly rolesObservable: Observable<string[]> = this.rolesSubject.asObservable();
 
   constructor(
   ) {
@@ -60,21 +62,18 @@ export class AppAuthService {
   }
 
   public getRoles(): Observable<string[]> {
-    if (this._decodedAccessToken) {
-      return new Observable<string[]>(observer => {
-        const roles = this._decodedAccessToken?.resource_access?.['einkaufsliste']?.roles;
-        if (roles) {
-          if (Array.isArray(roles)) {
-            observer.next(roles.map((r: string) => r.replace('ROLE_', '')));
-          } else {
-            observer.next([roles.replace('ROLE_', '')]);
-          }
-        } else {
-          observer.next([]);
-        }
-      });
+    return this.rolesObservable;
+  }
+
+  private computeRoles(): string[] {
+    const roles = this._decodedAccessToken?.resource_access?.['einkaufsliste']?.roles;
+    if (!roles) {
+      return [];
     }
-    return of([]);
+    if (Array.isArray(roles)) {
+      return roles.map((r: string) => r.replace('ROLE_', ''));
+    }
+    return [roles.replace('ROLE_', '')];
   }
 
   public getIdentityClaims(): Record<string, unknown> {
@@ -102,6 +101,7 @@ export class AppAuthService {
       this._accessToken = this.oauthService.getAccessToken();
       this.accessTokenSubject.next(this._accessToken);
       this._decodedAccessToken = this.jwtHelper.decodeToken(this._accessToken);
+      this.rolesSubject.next(this.computeRoles());
 
       if (this._decodedAccessToken?.family_name && this._decodedAccessToken?.given_name) {
         const username = this._decodedAccessToken?.given_name + ' ' + this._decodedAccessToken?.family_name;

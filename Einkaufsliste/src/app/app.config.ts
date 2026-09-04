@@ -1,7 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, inject, provideBrowserGlobalErrorListeners, provideEnvironmentInitializer } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, provideBrowserGlobalErrorListeners, provideEnvironmentInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi, withXsrfConfiguration } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthConfig, OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
 
 import { routes } from './app.routes';
@@ -16,7 +17,9 @@ export function storageFactory(): OAuthStorage {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     importProvidersFrom(BrowserModule),
     { provide: AuthConfig, useValue: authConfig },
     { provide: OAuthStorage, useFactory: storageFactory },

@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, Route
 import {OAuthService} from 'angular-oauth2-oidc';
 import {AppAuthService} from '../service/app.auth.service';
 
-export const appCanActivate: CanActivateFn = (
+export const appCanActivate: CanActivateFn = async (
   route: ActivatedRouteSnapshot,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   state: RouterStateSnapshot
@@ -11,6 +11,8 @@ export const appCanActivate: CanActivateFn = (
   const authService: AppAuthService = inject(AppAuthService);
   const oauthService: OAuthService = inject(OAuthService);
   const router = inject(Router);
+
+  await authService.waitForInit();
 
   let userRoles: string[] = [];
 
@@ -29,7 +31,7 @@ export const appCanActivate: CanActivateFn = (
 };
 
 function checkRoles(route: ActivatedRouteSnapshot, userRoles: string[]): boolean {
-  const roles = route.data['roles'] as Array<string>;
+  const roles = route.data['roles'] as string[];
 
   if (roles === undefined || roles === null || roles.length === 0) {
     return true;

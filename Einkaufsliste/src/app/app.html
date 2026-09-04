@@ -1,5 +1,39 @@
-<main class="page">
-  <h1>{{ title() }}</h1>
+<mat-toolbar color="primary">
+  <button mat-button [matMenuTriggerFor]="menu" aria-label="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['shoppinglists']">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Einkaufslisten</span>
+    </button>
+    <button *appIsInRoles="[roles.Admin]" mat-menu-item [routerLink]="['categories']">
+      <mat-icon>category</mat-icon>
+      <span>Kategorien</span>
+    </button>
+    <button *appIsInRoles="[roles.Admin]" mat-menu-item [routerLink]="['users']">
+      <mat-icon>group</mat-icon>
+      <span>Benutzerverwaltung</span>
+    </button>
+    <button mat-menu-item [routerLink]="['profile']">
+      <mat-icon>person</mat-icon>
+      <span>Mein Profil</span>
+    </button>
+  </mat-menu>
+
+  <span class="app-title">Einkaufsliste</span>
+
+  <span class="toolbar__spacer"></span>
+
+  <small>{{ pagetitle }}</small>
+
+  <span class="toolbar__spacer"></span>
+
   <app-app-login />
-  <router-outlet />
+</mat-toolbar>
+
+<main class="container">
+  <div class="container__section">
+    <router-outlet />
+  </div>
 </main>

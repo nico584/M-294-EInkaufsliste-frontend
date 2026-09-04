@@ -1,5 +1,13 @@
 .wrapper {
   padding: 40px;
+  text-align: center;
+}
+
+.no-access-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #b3261e;
 }
 
 .no-access {
